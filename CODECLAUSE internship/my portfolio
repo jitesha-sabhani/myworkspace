@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <style>
+        body {
+
+            font-family:Cambria;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(50, 115, 220, 0.3);
+        }
+        
+        header {
+            background-color:rgba(50, 115, 220, 0.3);
+
+            padding: 20px;
+            color: black ;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 32px;
+            text-decoration: underline;
+        }
+        
+        nav {
+            background-color: #555;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+        }
+        
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: #555;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p> Hello!
+            Myself Jitesha Rajesh Sabhani. I am currently persuing Bsc-It.I am passionate about writing code and developing high-quality softwares.I blend my creativity with logic seamlessly.  
+        </p>
+    </section>
+    
+    <section id="education">
+        <h2>Education</h2>
+        <p>Education:</p>
+        <ul>
+            <li>
+                <h3>SSC</h3>
+                <p>Fatima High School(87.00 %)</p>
+            </li>
+            <li>
+                <h3>HSC</h3>
+                <p>Chandibai Himmatmal Mansukhani College (86.33 %)</p>
+            </li>
+            <li>
+                <h3>BSC IT</h3>
+                <p>Vivekanad Education Society College of Arts,Science and Commerce(Autonomous)(Graduating in 2024)</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>If you would like to get in touch, please fill out the form below:</p>
+        <form method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
