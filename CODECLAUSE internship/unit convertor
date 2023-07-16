@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Converter</title>
+    <style>
+        body {
+            font-family: Cambria;
+            text-align: center;
+        }
+        
+        h1 {
+            color:#3D0754;
+            text-decoration: underline;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+        
+        input[type="number"] {
+            width: 120px;
+            padding: 10px;
+        }
+        
+        select {
+            width: 150px;
+            padding: 5px;
+        }
+        
+        .btn-convert {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #30B94C;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .result {
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unit Converter</h1>
+    
+    <div class="input-group">
+        <label for="value">Value:</label>
+        <input type="number" id="value" step="any">
+    </div>
+    
+    <div class="input-group">
+        <label for="from">From:</label>
+        <select id="from">
+            <option value="cm">Centimeter (cm)</option>
+            <option value="inch">Inch (in)</option>
+            <option value="m">Meter (m)</option>
+            <option value="ft">Feet (ft)</option>
+        </select>
+    </div>
+    
+    <div class="input-group">
+        <label for="to">To:</label>
+        <select id="to">
+            <option value="cm">Centimeter (cm)</option>
+            <option value="inch">Inch (in)</option>
+            <option value="m">Meter (m)</option>
+            <option value="ft">Feet (ft)</option>
+        </select>
+    </div>
+    
+    <button class="btn-convert" onclick="convert()">Convert</button>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        function convert() {
+            var value = parseFloat(document.getElementById("value").value);
+            var from = document.getElementById("from").value;
+            var to = document.getElementById("to").value;
+            
+            var result;
+            
+            if (from === "cm" && to === "inch") {
+                result = value * 0.393701;
+            } else if (from === "inch" && to === "cm") {
+                result = value * 2.54;
+            } else if (from === "m" && to === "ft") {
+                result = value * 3.28084;
+            } else if (from === "ft" && to === "m") {
+                result = value * 0.3048;
+            } else {
+                result = value; 
+            }
+            
+            document.getElementById("result").innerHTML = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>
