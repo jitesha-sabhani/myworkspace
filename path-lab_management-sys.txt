@@ -1,0 +1,267 @@
+****************************************************CREATION OF TABLES**************************************************************
+ create table tests(
+ testhead varchar2(5),
+ testid int primary key,
+ testname varchar2(10),
+ amount int
+  );
+
+
+
+ create table doctors(
+  did int primary key,
+  name varchar(15),
+  phone_num int,
+  mail_id varchar2(17),
+  qualification varchar2(10),
+  password varchar2(8)
+  );
+
+
+
+
+create table patients(
+pid int primary key,
+pname varchar(15),
+gender varchar(7),
+age int,
+address varchar2(10),
+mobile_num int,
+mail_id varchar2(17),
+did int,
+constraint fk_sc
+foreign key (did) references doctors (did)
+testid int,
+constraint fk_sd
+foreign key (testid) references tests (testid)
+);
+
+Table created.
+************************************STRUCTURE OF TABLES****************************************************
+
+desc tests
+
+desc doctors
+
+desc patients
+
+************************************INSERTION OF VALUES IN THE TABLE*************************************************
+ __TESTS__
+
+insert into tests values('blood',100,'CBC',200);
+insert into tests values('blood',101,'BMP',250);
+insert into tests values('blood',102,'BET',300);
+insert into tests values('blood',103,'Hb',220);
+insert into tests values('urine',200,'Urinalysis',300) ;
+insert into tests values('urine',201,'Rapid UT',350);
+insert into tests values('urine',202,'Uriculture',300);
+insert into tests values('fluid',300,'ph level',450);
+insert into tests values('fluid',301,'LHD',700);
+insert into tests values('fluid',302,'Cytology',800);
+insert into tests values('MCT',400,'FCASO',900);
+insert into tests values('MCT',401,'FUNID',1100);
+insert into tests values('MCT',402,'CTBID',980);
+insert into tests values('stool',501,'RVT',800);
+
+
+__DOCTORS__
+
+insert into doctors values (1001,'Dr.Haresh G',9895548454,'patho@gmail.com','MBBS','har@1001');
+insert into doctors values (1002,'Dr. Ashok V',8654792450,'patho@gmail.com','MBBS,MD','ash@1002');
+insert into doctors values (1003,'Dr Raj S',8649512226,'patho@gmail.com','MS,MD','raj@1003');
+
+
+__PATIENTS__
+ insert into patients values (1701,'Manoj Singh','Male',52,'Thane',8978451245,'msin@gmail.com');
+insert into patients values (1702,'Kriti Jha','Female',45,'Chembur',8952742612,'kj@gmail.com');
+insert into patients values (1703,'Hiren Wadhwa','Male',27,'Kalyan',8945321060,'hw@gmail.com');
+
+ 
+
+
+
+select * from tests;
+select * from doctors;
+select * from patients;
+
+
+
+****************************************************************AGGREGATE FUNCTIONS**********************************************************
+SUM OF AMOUNT
+	select sum(amount)
+	from tests;
+
+MINIMUM AMOUNT
+	select min(amount)
+	from tests;
+
+MAXIMUM AMOUNT
+	select max(amount)
+	from tests;
+
+AVERAGE AMOUNT
+	select avg(amount)
+	from tests;
+
+MAX AMT GROUPBY TESTHEAD
+	select max(amount)
+	from tests
+	group by testhead;
+
+COUNT
+	select count(*) from tests;
+
+COUNT DISTINCT TESTHEAD 
+	select count(distinct testhead)
+	from tests;
+
+*********************************************************************STRING FUNCTION****************************************************************
+UPPERCASE
+	select upper(testhead)
+	from tests;
+
+LOWERCASE
+	select lower(testhead)
+	from tests;
+
+CONCAT
+	select concat(testhead,testname)
+	from tests;
+
+LENGTH
+	select length(testhead)
+	from tests;
+
+REVERSE
+	select reverse(testhead)
+	from tests;
+
+CONCAT WITH NEW NAME
+	select concat(testhead,testid)
+	as "requirement"
+	from tests;
+
+******************************************************************COMPARISON OPERATOR*******************************************
+IS EQUAL TO
+	select * from tests
+	where testhead='blood';
+
+IS NOT EQUAL TO
+	select * from tests
+	where testhead !='blood';
+
+LESS THAN
+	select * from tests
+	where amount <400;
+
+GREATER THAN
+	select * from tests
+	where amount >800;
+
+*********************************************** CLAUSES*********************************************
+Q:NAME AND TESTHEAD 
+select name from patients
+where pid=1701
+union
+select testhead from tests
+where testid=103;
+
+Q.NAME AND TESTNAME
+select name from patients
+where pid=1701
+union
+select testname from tests
+where testid=103;
+
+Q NAME,GENDER,TESTNAME,TESTHEAD
+select name,gender from patients
+where pid=1701
+union
+select testname,testhead from tests
+where testid=103;
+
+Q. GROUP BY HAVING CLAUSE
+select amount from tests
+group by amount having(amount)>=800;
+
+  
+********************************JOINS***********************************
+
+Q. ALL DATA OF A PATIENT
+
+	select * from patients
+	 where pid=1702;
+
+
+Q.Kaunse patients nai kaunsa test karwaya
+
+	select p.name,t.testname
+	from patients p 
+	inner join tests t
+	on p.testid=t.testid;
+
+	
+Q. Patient ka pura detail with test name
+
+	select *from patients p 
+	left outer join tests t
+	on p.testid=t.testid;
+
+
+Q. kaunse patient ko kaunse dr nai attent kiya
+	select p.name,d.name
+	from patients p 
+	inner join doctors d
+	on p.did=d.did;
+
+
+************************************************SUB QUERIES*************************************
+Q. Patient ka naam max age
+	
+	 select name from patients
+ 	where age in(select max(age) from patients);
+
+Q.Patient ka naame aur age(max)
+	select name,age from patients
+	where age in(select max(age) from patients);
+
+
+Q. Full details of max age
+	select * from patients
+	where age in(select max(age) from patients);
+
+
+Q. Second max age
+	select max(age) from patients
+	where age not in(select max(age) from patients );
+
+
+Q. Full details of second max age
+	select * from patients
+	where age in (select max(age) from patients
+	where age not in(select max(age) from patients ));
+
+
+
+***********************VIEWS***********************************
+create view dtps
+as 
+select d.name,t.testname,p.pid,p.pname
+from doctors d, tests t, patients p
+where p.did=d.did and p.testid=t.testid;
+
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+ 
